@@ -76,7 +76,7 @@ Before you begin, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-backend-repository-url>
+git clone <[backend-repository-url](https://github.com/shahenda23/GeoAssetManagementSystemBackend.git)>
 cd GeoAssetManagementSystem
 ```
 
