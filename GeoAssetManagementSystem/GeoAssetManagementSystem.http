@@ -1,0 +1,6 @@
+@GeoAssetManagementSystem_HostAddress = http://localhost:5145
+
+GET {{GeoAssetManagementSystem_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
