@@ -11,6 +11,7 @@ namespace GeoAssetManagementSystem.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class AccountController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
@@ -57,7 +58,6 @@ namespace GeoAssetManagementSystem.Controllers
         }
         private string GenerateJwtToken(User user)
         {
-            // Adding a fallback or null check prevents the ArgumentNullException
             var jwtKey = _config["JwtSettings:Key"];
             if (string.IsNullOrEmpty(jwtKey))
             {

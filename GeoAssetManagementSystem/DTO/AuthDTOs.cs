@@ -8,7 +8,7 @@ namespace GeoAssetManagementSystem.DTOs
         public string Username { get; set; }
 
         [Required]
-        [EmailAddress] // Ensures a professional email format
+        [EmailAddress] 
         public string Email { get; set; }
 
         [Required]

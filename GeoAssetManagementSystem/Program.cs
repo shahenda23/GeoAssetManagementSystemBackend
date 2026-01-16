@@ -16,20 +16,17 @@ namespace GeoAssetManagementSystem
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // 1. Database Connection
             builder.Services.AddDbContext<LocationContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("cs")));
-
-            // 2. Identity Service
+            
             builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<LocationContext>()
                 .AddDefaultTokenProviders();
 
-            // 3. Register Repository for Dependency Injection
+            
             builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 
-            // 4. JWT Authentication Setup
-            // Fallback key ensures the app doesn't crash with a 500 error if appsettings is missing the key
+            
             var jwtKey = builder.Configuration["JwtSettings:Key"] ?? "GeoAssetSystem_Secure_Key_2026_@_Secure_Long_String";
             var keyBytes = Encoding.ASCII.GetBytes(jwtKey);
 
@@ -47,7 +44,7 @@ namespace GeoAssetManagementSystem
                 };
             });
 
-            // Add this after AddAuthentication
+            
             builder.Services.AddCors(options => {
                 options.AddPolicy("AllowAngular", policy =>
                     policy.WithOrigins("http://localhost:4200")
@@ -57,7 +54,7 @@ namespace GeoAssetManagementSystem
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            //builder.Services.AddSwaggerGen();
+            
             builder.Services.AddSwaggerGen(options =>
             {
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -97,7 +94,7 @@ namespace GeoAssetManagementSystem
             app.UseHttpsRedirection();
             app.UseCors("AllowAngular");
 
-            // 5. Correct Middleware Order
+            
             app.UseAuthentication(); 
             app.UseAuthorization();  
 

@@ -2,7 +2,6 @@
 
 namespace GeoAssetManagementSystem.DTOs
 {
-    // For sending data to the Angular Map (GET)
     public class LocationReadDto
     {
         public int Id { get; set; }
@@ -13,15 +12,14 @@ namespace GeoAssetManagementSystem.DTOs
         public DateTime DateTime { get; set; }
     }
 
-    // For creating a new location (POST)
     public class LocationCreateDto
     {
-        [Required(ErrorMessage = "Location name is required")] // Requirement 5: Validation
+        [Required(ErrorMessage = "Location name is required")] 
         [StringLength(100)]
         public string Name { get; set; }
 
         [Required]
-        [Range(-90, 90)] // Validates geographic boundaries
+        [Range(-90, 90)] 
         public decimal Latitude { get; set; }
 
         [Required]
@@ -31,7 +29,6 @@ namespace GeoAssetManagementSystem.DTOs
         public string? Description { get; set; }
     }
 
-    // For updating existing data (PUT)
     public class LocationUpdateDto : LocationCreateDto
     {
         [Required]

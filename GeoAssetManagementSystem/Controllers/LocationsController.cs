@@ -21,23 +21,20 @@ namespace GeoAssetManagementSystem.Controllers
             _repository = repository;
         }
 
-        // Helper method to get the logged-in User's ID from the JWT token
-        //دى اللى هتجيب اليوزر id اللى جوا التوكن
+
         private string UserId => User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        [HttpGet] //to get data
+        [HttpGet] 
         public async Task<ActionResult<IEnumerable<LocationReadDto>>> GetLocations([FromQuery] string? name)
         {
             IEnumerable<Location> locations;
 
             if (!string.IsNullOrEmpty(name))
             {
-                // Requirement: Search for locations by name
                 locations = await _repository.SearchByNameAsync(name, UserId);
             }
             else
             {
-                // Requirement: List all locations for the current user
                 locations = await _repository.GetAllAsync(UserId);
             }
 
@@ -54,7 +51,7 @@ namespace GeoAssetManagementSystem.Controllers
             return Ok(results);
         }
 
-        [HttpPost] //to create location
+        [HttpPost]
         public async Task<ActionResult<LocationReadDto>> CreateLocation(LocationCreateDto dto)
         {
             if (!ModelState.IsValid)
